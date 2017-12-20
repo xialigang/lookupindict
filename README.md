@@ -16,9 +16,9 @@ This little tool is actually like a dictionary. It is to look up a word  or a ph
         lookupindict python
         
 
-- Look up a phrase
+- Look up a phrase ('\' is needed before a blank)
 
-        lookupindict look_up
+        lookupindict look\ up
 	   
 
 - Look up a word/phrase and save it to a directory, the default path is './dir_lookupindict'.
