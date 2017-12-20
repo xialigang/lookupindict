@@ -66,7 +66,7 @@ def show_info():
 def main():
     """Main program entry point"""
 
-    show_info()
+    #show_info()
 
     options, word = _parse_options()
 
