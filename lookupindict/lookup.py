@@ -25,6 +25,7 @@ class Lookup(object):
     sentences = []
 
     exist_locally = False
+    exist_in_dictcn = False
 
     def __init__(self, word, **kwargs):
         """ Configures this converter. Available ``args`` are:
@@ -75,17 +76,28 @@ class Lookup(object):
             return line
 
     def get_prons(self):
-        prons0 = self.content.find_all(name='div', class_ = 'phonetic')[0]
+        prons0 = self.content.find_all(name='div', class_ = 'phonetic')
+        if not prons0:
+            return
+        prons0 = prons0[0]
+        
         prons = prons0.find_all(name='bdo', lang = 'EN-US')
+        #print 'prons =', prons
+        if len(prons) == 0:
+            self.exist_in_dictcn = False
+            return
         for pron in prons:
             a = str(pron)
             a = self.clear_tag(a)
             self.prons.append(a+'\n')
         return
     def get_meanings(self):
-        meanings0 = self.content.find_all(name='ul', class_ = 'dict-basic-ul')[0]
+        meanings0 = self.content.find_all(name='ul', class_ = 'dict-basic-ul')
+        if not meanings0:
+            return
+        meanings0 = meanings0[0]
         meanings = meanings0.find_all('li')
-        #print meanings
+        #print 'meanings =', meanings
         #print 'len of meanings =', len(meanings)
         for m in meanings:
             m = str(m).strip()
@@ -97,9 +109,12 @@ class Lookup(object):
             self.meanings.append(m+'\n')
         return
     def get_sentences(self):
-        sentences0 = self.content.find_all(name='div', class_ = 'section sent')[0]
+        sentences0 = self.content.find_all(name='div', class_ = 'section sent')
+        if not sentences0:
+            return
+        sentences0 = sentences0[0]
         sentences = sentences0.find_all('div', class_ = 'layout sort')[0].find_all('li')
-        #print sentences
+        #print 'sentences =', sentences
         #print 'len of sentences =', len(sentences)
         i_sent = 0
         for m in sentences:
@@ -139,6 +154,8 @@ class Lookup(object):
         self.get_meanings()
         self.get_sentences()
         s = self.prons+self.meanings+self.sentences
+        if len(s) == 0:
+            self.exist_in_dictcn = False
         print self.word
         for a in s:
             print a.strip()
@@ -148,7 +165,7 @@ class Lookup(object):
             self.get_local()
         print 'Here are the results from dict.cn .'
         self.get_from_dictcn()
-        if self.save:
+        if self.save and self.exist_in_dictcn:
             self.save_to_local()
      
     
