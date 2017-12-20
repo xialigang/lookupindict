@@ -5,7 +5,7 @@ This little tool is actually like a dictionary. It is to look up a word  or a ph
 
 ## How to get it ?
 
-	git clone https://github.com/xialigang/lookupindict
+    git clone https://github.com/xialigang/lookupindict
 	cd lookupindict
 	source install.sh
 
@@ -13,19 +13,22 @@ This little tool is actually like a dictionary. It is to look up a word  or a ph
 
 - Look up a word
 
-	lookupindict python
+        lookupindict python
+        
 
 - Look up a phrase
 
-	lookupindict look_up
+        lookupindict look_up
+	   
 
 - Look up a word/phrase and save it to a directory, the default path is './dir_lookupindict'.
 
-	lookupindict python -s 
-
+        lookupindict python -s
+        
 - You can specify the directory with the option [-l/--localpath].
 
-	lookupindict python -s -l where-I-like
+        lookupindict python -s -l where-I-like
+        
 
 If you have specified the directory, the tool will look up the word/phrase locally and then look it up from dict.cn .
 
