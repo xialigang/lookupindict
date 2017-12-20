@@ -156,6 +156,8 @@ class Lookup(object):
         s = self.prons+self.meanings+self.sentences
         if len(s) == 0:
             self.exist_in_dictcn = False
+        else:
+            self.exist_in_dictcn = True
         print self.word
         for a in s:
             print a.strip()
