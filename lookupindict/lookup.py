@@ -41,7 +41,7 @@ class Lookup(object):
         self.word = word
         
         if '_' in word:
-            self.WORD = word.replace('_', '')
+            self.WORD = word.replace('_', ' ')
         else:
             self.WORD = word
 
